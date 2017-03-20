@@ -33,39 +33,63 @@ class Character extends Component {
             let socketInfo = null;
             if (this.state.missingSockets.length > 0) {
 
-                let listItems = this.state.missingSockets.map(item => {
+                let listItems = this.state.missingSockets.filter(item => {
+                    if (!this.props.showWarning) {
+                        return false;
+                    }
+                    return true;
+                }).map(item => {
                     return <ListItem key={"socket" + item} primaryText={item} leftIcon={<Warning color='#FF0000'/>}/>
                 });
 
-                socketInfo = (
-                    <div className="sockets">
-                        <span>Missing sockets</span>
-                        <List>
-                            {listItems}
-                        </List>
-                    </div>
-                )
+                if (listItems.length > 0) {
+                    socketInfo = (
+                        <div className="sockets">
+                            <span>Missing sockets</span>
+                            <List>
+                                {listItems}
+                            </List>
+                        </div>
+                    )
+                }
             }
 
             let enchantInfo = null;
             if (this.state.missingEnchants.length > 0) {
 
-                let listItems = this.state.missingEnchants.map(item => {
-
-                    if (getErrorType(item, 'enchant') == 'error') {
+                let listItems = this.state.missingEnchants.filter(item => {
+                    let type = getErrorType(item, 'enchant');
+                    if ((!this.props.showError) && type == 'error') {
+                        return false;
+                    }
+                    if ((!this.props.showWarning) && type == 'warning') {
+                        return false;
+                    }
+                    return true;
+                }).map(item => {
+                    let type = getErrorType(item, 'enchant');
+                    if (type == 'error') {
                         return <ListItem key={"enchant" + item} primaryText={item} leftIcon={<Error color='#FFBF00'/>}/>
                     }
-                    return <ListItem key={"enchant" + item} primaryText={item} leftIcon={<Warning color='#FF0000'/>}/>
+                    else if(type == 'warning') {
+                        return <ListItem key={"enchant" + item} primaryText={item} leftIcon={<Warning color='#FF0000'/>}/>
+                    }
                 });
 
-                enchantInfo = (
-                    <div className="enchants">
-                        <span>Missing enchants</span>
-                        <List>
-                            {listItems}
-                        </List>
-                    </div>
-                )
+                if (listItems.length > 0) {
+                    enchantInfo = (
+                        <div className="enchants">
+                            <span>Missing enchants</span>
+                            <List>
+                                {listItems}
+                            </List>
+                        </div>
+                    )
+                }
+            }
+
+            if (socketInfo == null && enchantInfo == null) {
+                return null;
             }
 
             return (

@@ -2,3 +2,7 @@
     display: block;
     flex-wrap: wrap;
 }
+
+.paper-gear-container {
+    padding: 10px;
+}

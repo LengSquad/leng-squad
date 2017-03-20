@@ -26,7 +26,9 @@ class Main extends Component {
                     iconClassNameRight="muidocs-icon-navigation-expand-more"
                 >
                 </AppBar>
-                <PaperGear characters={this.state.raiders}/>
+                <div className="paper-gear-container">
+                    <PaperGear characters={this.state.raiders}/>
+                </div>
             </div>
         );
     }

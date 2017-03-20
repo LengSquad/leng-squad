@@ -1,18 +1,19 @@
 .container {
     width: 350px;
     margin: 10px;
-    textAlign: left;
+    text-align: left;
     display: inline-block;
-    backgroundColor: #ababab;
 }
 
 .name {
     padding: 0px;
     line-height: 2;
     border-bottom: thin inset;
+    text-align: center;
 }
 
 .content {
     padding: 10px;
     display: flex;
+    text-align: center;
 }
