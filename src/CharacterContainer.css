@@ -1,0 +1,17 @@
+.container {
+    margin: 10px;
+    textAlign: left;
+    display: inline-block;
+    backgroundColor: #ababab;
+}
+
+.name {
+    padding: 0px;
+    line-height: 2;
+    border-bottom: thin inset;
+}
+
+.content {
+    padding: 10px;
+    display: flex;
+}

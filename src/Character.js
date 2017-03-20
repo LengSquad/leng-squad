@@ -1,10 +1,14 @@
 import React, {Component} from 'react';
-import { getCharacterInfo, getClassColor, getSlotItem } from './API.js';
-import {List, ListItem} from 'material-ui/List';
-import Warning from 'material-ui/svg-icons/alert/warning';
+import { getCharacterInfo, isEnchantable, getErrorType, getSlotItem } from './API.js';
 import './Character.css';
 
+
+import {List, ListItem} from 'material-ui/List';
 import Paper from 'material-ui/Paper';
+import Warning from 'material-ui/svg-icons/alert/warning';
+import Error from 'material-ui/svg-icons/alert/error';
+
+import CharacterContainer from './CharacterContainer.js';
 
 class Character extends Component {
 
@@ -13,7 +17,6 @@ class Character extends Component {
         this.state = {
             show: false,
             data: [],
-            sockets: []
         }
     }
 
@@ -26,13 +29,12 @@ class Character extends Component {
         let audit = this.state.data.audit;
         let classID = this.state.data.class;
         if (audit) {
-            let classColor = getClassColor(classID);
 
             let socketInfo = null;
             if (this.state.missingSockets.length > 0) {
 
                 let listItems = this.state.missingSockets.map(item => {
-                    return <ListItem key={item} primaryText={item} leftIcon={<Warning color='#FF0000'/>}/>
+                    return <ListItem key={"socket" + item} primaryText={item} leftIcon={<Warning color='#FF0000'/>}/>
                 });
 
                 socketInfo = (
@@ -42,10 +44,27 @@ class Character extends Component {
                 )
             }
 
+            let enchantInfo = null;
+            if (this.state.missingEnchants.length > 0) {
+
+                let listItems = this.state.missingEnchants.map(item => {
+
+                    if (getErrorType(item, 'enchant') == 'error') {
+                        return <ListItem key={"enchant" + item} primaryText={item} leftIcon={<Error color='#FFFF00'/>}/>
+                    }
+                    return <ListItem key={"enchant" + item} primaryText={item} leftIcon={<Warning color='#FF0000'/>}/>
+                });
+
+                enchantInfo = (
+                    <List>
+                        {listItems}
+                    </List>
+                )
+            }
+
 
             return (
-                <Paper className="container" zDepth={1}>
-                    <div className="name" style={{backgroundColor: classColor}}>{this.props.name}</div>
+                <CharacterContainer classID={classID} name={this.state.data.name}>
                     <div className="content">
                         <div className="sockets">
                             <span>Missing sockets</span>
@@ -53,9 +72,10 @@ class Character extends Component {
                         </div>
                         <div>
                             <span>Missing enchants</span>
+                            <div>{enchantInfo}</div>
                         </div>
                     </div>
-                </Paper>
+                </CharacterContainer>
             );
         }
         else {
@@ -76,12 +96,17 @@ class Character extends Component {
             let missingSockets = Object.keys(data.audit.itemsWithEmptySockets).map(id => {
                 return getSlotItem(id);
             });
+            let missingEnchants = Object.keys(data.audit.unenchantedItems).filter(id => {
+                return isEnchantable(id);
+            }).map(id => {
+                return getSlotItem(id);
+            });
 
-            if (missingSockets.length > 0) {
+            if (missingSockets.length > 0 || missingEnchants.length > 0) {
                 show = true;
             }
 
-            this.setState({data: data, show: show, missingSockets: missingSockets});
+            this.setState({data: data, show: show, missingSockets: missingSockets, missingEnchants: missingEnchants});
         });
     }
 

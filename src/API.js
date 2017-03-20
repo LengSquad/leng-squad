@@ -66,6 +66,23 @@ export function getSlotItem(id) {
     return slots[id];
 }
 
+export function isEnchantable(id) {
+    const slots = ['1', '2', '10', '11', '14'];
+    return slots.indexOf(id) > -1;
+}
+
+export function getErrorType(slot, type) {
+
+    const errorList = ['Shoulder'];
+
+    if (type == 'enchant') {
+        if (errorList.indexOf(slot) > -1) {
+            return 'error';
+        }
+    }
+    return 'warning';
+}
+
 function fetchFromServer(query) {
     return fetch(baseURL + query + '&locale=en_GB&apikey=' + key, {
         credentials: "same-origin"
