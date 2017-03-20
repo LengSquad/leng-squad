@@ -1,4 +1,5 @@
 .container {
+    width: 350px;
     margin: 10px;
     textAlign: left;
     display: inline-block;

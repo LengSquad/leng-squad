@@ -38,9 +38,12 @@ class Character extends Component {
                 });
 
                 socketInfo = (
-                    <List>
-                        {listItems}
-                    </List>
+                    <div className="sockets">
+                        <span>Missing sockets</span>
+                        <List>
+                            {listItems}
+                        </List>
+                    </div>
                 )
             }
 
@@ -56,25 +59,19 @@ class Character extends Component {
                 });
 
                 enchantInfo = (
-                    <List>
-                        {listItems}
-                    </List>
+                    <div className="enchants">
+                        <span>Missing enchants</span>
+                        <List>
+                            {listItems}
+                        </List>
+                    </div>
                 )
             }
 
-
             return (
                 <CharacterContainer classID={classID} name={this.state.data.name}>
-                    <div className="content">
-                        <div className="sockets">
-                            <span>Missing sockets</span>
-                            <div>{socketInfo}</div>
-                        </div>
-                        <div>
-                            <span>Missing enchants</span>
-                            <div>{enchantInfo}</div>
-                        </div>
-                    </div>
+                    {socketInfo}
+                    {enchantInfo}
                 </CharacterContainer>
             );
         }
