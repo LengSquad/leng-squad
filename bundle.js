@@ -14384,8 +14384,8 @@ var PaperGear = function (_Component) {
                     null,
                     'Optimization'
                 ),
-                _react2.default.createElement(_Checkbox2.default, { label: 'Show Errors', defaultChecked: true, onCheck: this.checkError }),
-                _react2.default.createElement(_Checkbox2.default, { label: 'Show Warnings', defaultChecked: true, onCheck: this.checkWarning }),
+                _react2.default.createElement(_Checkbox2.default, { label: 'Show gold loss', defaultChecked: true, onCheck: this.checkError }),
+                _react2.default.createElement(_Checkbox2.default, { label: 'Show stat loss', defaultChecked: true, onCheck: this.checkWarning }),
                 _react2.default.createElement(
                     'div',
                     { className: 'character-container' },

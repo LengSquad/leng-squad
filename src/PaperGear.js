@@ -29,8 +29,8 @@ class PaperGear extends Component {
         return (
             <Paper className="paper-gear-container" zDepth={1}>
                 <h1>Optimization</h1>
-                <Checkbox label="Show Errors" defaultChecked={true} onCheck={this.checkError}/>
-                <Checkbox label="Show Warnings" defaultChecked={true} onCheck={this.checkWarning}/>
+                <Checkbox label="Show gold loss" defaultChecked={true} onCheck={this.checkError}/>
+                <Checkbox label="Show stat loss" defaultChecked={true} onCheck={this.checkWarning}/>
                 <div className="character-container">
                     {characters}
                 </div>
