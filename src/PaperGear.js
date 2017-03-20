@@ -1,17 +1,10 @@
 import React, {Component} from 'react';
+import './PaperGear.css';
 
 import Character from './Character.js';
 
 import Paper from 'material-ui/Paper';
 import Checkbox from 'material-ui/Checkbox';
-import Subheader from 'material-ui/Subheader';
-
-const style = {
-    width: '100%',
-    padding: 10,
-    textAlign: 'center',
-    display: 'inline-block',
-};
 
 class PaperGear extends Component {
 
@@ -28,9 +21,11 @@ class PaperGear extends Component {
 
         return (
             <Paper zDepth={1}>
-                <Subheader>Optimization</Subheader>
+                <h1>Optimization</h1>
                 <Checkbox label="Errors"/>
-                {characters}
+                <div className="character-container">
+                    {characters}
+                </div>
             </Paper>
         )
     }
