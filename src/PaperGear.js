@@ -3,6 +3,8 @@ import React, {Component} from 'react';
 import Character from './Character.js';
 
 import Paper from 'material-ui/Paper';
+import Checkbox from 'material-ui/Checkbox';
+import Subheader from 'material-ui/Subheader';
 
 const style = {
     width: '100%',
@@ -25,8 +27,9 @@ class PaperGear extends Component {
         });
 
         return (
-            <Paper style={style} zDepth={1}>
-                <h2>Enchants and Gems</h2>
+            <Paper zDepth={1}>
+                <Subheader>Optimization</Subheader>
+                <Checkbox label="Errors"/>
                 {characters}
             </Paper>
         )

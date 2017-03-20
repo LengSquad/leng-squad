@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { getGuildMembers, getCharacterInfo } from './API.js';
 import AppBar from 'material-ui/AppBar';
+import Drawer from 'material-ui/Drawer';
 
 import PaperGear from './PaperGear';
 
@@ -23,7 +24,8 @@ class Main extends Component {
                 <AppBar
                     title="Leng Squad"
                     iconClassNameRight="muidocs-icon-navigation-expand-more"
-                />
+                >
+                </AppBar>
                 <PaperGear characters={this.state.raiders}/>
             </div>
         );

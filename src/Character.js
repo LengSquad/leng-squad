@@ -53,7 +53,7 @@ class Character extends Component {
                 let listItems = this.state.missingEnchants.map(item => {
 
                     if (getErrorType(item, 'enchant') == 'error') {
-                        return <ListItem key={"enchant" + item} primaryText={item} leftIcon={<Error color='#FFFF00'/>}/>
+                        return <ListItem key={"enchant" + item} primaryText={item} leftIcon={<Error color='#FFBF00'/>}/>
                     }
                     return <ListItem key={"enchant" + item} primaryText={item} leftIcon={<Warning color='#FF0000'/>}/>
                 });
