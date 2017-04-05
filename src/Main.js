@@ -3,9 +3,11 @@ import { getGuildMembers, getCharacterInfo } from './API.js';
 import AppBar from 'material-ui/AppBar';
 import Drawer from 'material-ui/Drawer';
 
-import PaperGear from './PaperGear';
+//import PaperGear from './PaperGear';
 
 import './Main.css';
+import Page from "./Page";
+import Feed from "./Containers/Feed";
 
 class Main extends Component {
 
@@ -18,7 +20,6 @@ class Main extends Component {
     }
 
     render() {
-
         return (
             <div>
                 <AppBar
@@ -26,30 +27,30 @@ class Main extends Component {
                     iconClassNameRight="muidocs-icon-navigation-expand-more"
                 >
                 </AppBar>
-                <div className="paper-gear-container">
-                    <PaperGear characters={this.state.raiders}/>
-                </div>
+                <Page title="Feed">
+                    <Feed/>
+                </Page>
             </div>
         );
     }
 
     componentDidMount() {
-        getGuildMembers(guild => {
-            console.log(guild);
-
-            let raiders = guild.members.filter(member => {
-                if(member.rank == 2) {
-                    return false;
-                }
-                return member.rank <= 5;
-            });
-            raiders = raiders.sort(this.rank);
-
-            this.setState({
-                members: guild.members,
-                raiders: raiders
-            });
-        });
+        // getGuildMembers(guild => {
+        //     console.log(guild);
+        //
+        //     let raiders = guild.members.filter(member => {
+        //         if(member.rank == 2) {
+        //             return false;
+        //         }
+        //         return member.rank <= 5;
+        //     });
+        //     raiders = raiders.sort(this.rank);
+        //
+        //     this.setState({
+        //         members: guild.members,
+        //         raiders: raiders
+        //     });
+        // });
     }
 
     rank(char1, char2) {

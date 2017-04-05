@@ -4,13 +4,18 @@ const baseURL = 'https://eu.api.battle.net/wow/';
 const key = 'kwcpzkt7cbbbm4naadthqv4ev6sbufnj';
 
 export function getGuildMembers(callback) {
-   fetchFromServer('guild/outland/leng%20squad?fields=members').then(data => {
+   fetchFromServer('guild/outland/leng%20squad?fields=members&').then(data => {
        callback(data);
    });
 }
 
-export function getCharacterInfo(name, callback) {
+export function getGuildFeed(callback) {
+    fetchFromServer('guild/outland/leng%20squad?fields=news&').then(data => {
+        callback(data);
+    })
+}
 
+export function getCharacterInfo(name, callback) {
     const query = 'character/outland/' + name + '?fields=audit';
 
     fetchFromServer(query).then(data => {
@@ -18,47 +23,12 @@ export function getCharacterInfo(name, callback) {
     });
 }
 
-export function getClassColor(id) {
-    let classColor = '#000000';
-    switch (id) {
-        case 1:
-            classColor = '#C79C6E';
-            break;
-        case 2:
-            classColor = '#F58CBA';
-            break;
-        case 3:
-            classColor = '#ABD473';
-            break;
-        case 4:
-            classColor = '#FFF569';
-            break;
-        case 5:
-            classColor = '#FFFFFF';
-            break;
-        case 6:
-            classColor = '#C41F3B';
-            break;
-        case 7:
-            classColor = '#0070DE';
-            break;
-        case 8:
-            classColor = '#69CCF0';
-            break;
-        case 9:
-            classColor = '#9482C9';
-            break;
-        case 10:
-            classColor = '#00FF96';
-            break;
-        case 11:
-            classColor = '#FF7D0A';
-            break;
-        case 12:
-            classColor = '#A330C9';
-            break;
-    }
-    return classColor;
+export function getItemInfo(id, context, bonusLists, callback) {
+    const query = 'item/' + id + "/" + context + "?bl=" + bonusLists + "&";
+
+    fetchFromServer(query).then(data => {
+        callback(data)
+    });
 }
 
 export function getSlotItem(id) {
@@ -84,7 +54,7 @@ export function getErrorType(slot, type) {
 }
 
 function fetchFromServer(query) {
-    return fetch(baseURL + query + '&locale=en_GB&apikey=' + key, {
+    return fetch(baseURL + query + 'locale=en_GB&apikey=' + key, {
         credentials: "same-origin"
     }).then(response => {
         if (response.status >= 400) {

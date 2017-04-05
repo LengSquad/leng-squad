@@ -1,0 +1,12 @@
+.item {
+    display: flex;
+    background-color: rgb(14,14,14);
+}
+
+.item-info {
+    padding: 10px;
+}
+
+.item-info-level {
+    color: #ffd100;
+}
