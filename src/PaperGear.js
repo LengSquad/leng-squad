@@ -11,7 +11,7 @@ class PaperGear extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            showErrors: true,
+            showErrors: false,
             showWarnings: true
         }
 
@@ -29,7 +29,7 @@ class PaperGear extends Component {
         return (
             <Paper className="paper-gear-container" zDepth={1}>
                 <h1>Optimization</h1>
-                <Checkbox label="Show gold loss" defaultChecked={true} onCheck={this.checkError}/>
+                <Checkbox label="Show gold loss" defaultChecked={false} onCheck={this.checkError}/>
                 <Checkbox label="Show stat loss" defaultChecked={true} onCheck={this.checkWarning}/>
                 <div className="character-container">
                     {characters}
