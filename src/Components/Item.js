@@ -25,13 +25,19 @@ class Item extends Component {
 
         return (
             <Paper className="item" zDepth={1}>
-                <div>
+                <div style={{borderColor: color}} className="item-image-container">
                     <img src={url}/>
                 </div>
                 <div className="item-info">
-                    <div style={{color: color}}>{item.name}</div>
-                    {description}
-                    <div className="item-info-level">Item Level {item.itemLevel}</div>
+                    <div className="item-info-box">
+                        <div style={{color: color}}>{item.name}</div>
+                    </div>
+                    <div className="item-info-box">
+                        {description}
+                    </div>
+                    <div className="item-info-box">
+                        <div className="item-info-level">Item Level {item.itemLevel}</div>
+                    </div>
                 </div>
             </Paper>
         );

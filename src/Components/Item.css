@@ -1,10 +1,22 @@
 .item {
     display: flex;
     background-color: rgb(14,14,14);
+    width: 400px;
+}
+
+.item-image-container {
+    height: 56px;
+    width: 56px;
+    margin: 12px;
+    border: inset;
 }
 
 .item-info {
-    padding: 10px;
+    margin: 12px;
+}
+
+.item-info-box {
+    height: 20.5px;
 }
 
 .item-info-level {
