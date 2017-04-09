@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import './Members.css';
 
 import {List, ListItem} from 'material-ui/List';
+import Avatar from 'material-ui/Avatar';
 
 const rankMapping = {
     0: "Guild Master",
@@ -29,14 +30,13 @@ class Members extends Component {
             this.setState({members});
         }
     }
-    
-    render() {
 
-        let lastRank = -1;
+    render() {
 
         console.log(this.state.members[0]);
 
-        let ranks = [];
+        let lastRank = -1;
+        const ranks = [];
 
         for (let i in this.state.members) {
             const member = this.state.members[i];
@@ -52,7 +52,11 @@ class Members extends Component {
         let members = ranks.map((rankList, i) => {
 
             let list = rankList.map(member => {
+
+                const imageUrl = "http://render-api-eu.worldofwarcraft.com/static-render/eu/" + member.character.thumbnail;
+
                 return <ListItem
+                    leftAvatar={<Avatar src={imageUrl}/>}
                     key={member.character.name}
                     primaryText={member.character.name}
                 />
