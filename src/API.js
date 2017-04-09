@@ -3,6 +3,12 @@
 const baseURL = 'https://eu.api.battle.net/wow/';
 const key = 'kwcpzkt7cbbbm4naadthqv4ev6sbufnj';
 
+export function getGuildInfoAll(callback) {
+    fetchFromServer('guild/outland/leng%20squad?fields=members,news&').then(data => {
+        callback(data);
+    });
+}
+
 export function getGuildMembers(callback) {
    fetchFromServer('guild/outland/leng%20squad?fields=members&').then(data => {
        callback(data);
@@ -24,7 +30,11 @@ export function getCharacterInfo(name, callback) {
 }
 
 export function getItemInfo(id, context, bonusLists, callback) {
-    const query = 'item/' + id + "/" + context + "?bl=" + bonusLists + "&";
+    let query = 'item/' + id + "/" + context + "?bl=" + bonusLists + "&";
+
+    if (context === "") {
+        query = 'item/' + id + "?bl=" + bonusLists + "&";
+    }
 
     fetchFromServer(query).then(data => {
         callback(data)

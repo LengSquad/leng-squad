@@ -1,21 +1,21 @@
 import React, {Component} from 'react';
-import { getGuildMembers, getCharacterInfo } from './API.js';
+import { getGuildInfoAll } from './API.js';
 import AppBar from 'material-ui/AppBar';
 import Drawer from 'material-ui/Drawer';
 
 //import PaperGear from './PaperGear';
 
 import './Main.css';
-import Page from "./Page";
+import Page from "./Components/Page";
 import Feed from "./Containers/Feed";
+import Members from "./Containers/Members";
 
 class Main extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            members: [],
-            raiders: []
+            guild: []
         }
     }
 
@@ -27,14 +27,23 @@ class Main extends Component {
                     iconClassNameRight="muidocs-icon-navigation-expand-more"
                 >
                 </AppBar>
-                <Page title="Feed">
-                    <Feed/>
-                </Page>
+                <div className="main-content">
+                    <Page title="Members" >
+                        <Members members={this.state.guild.members}/>
+                    </Page>
+                    <Page title="Feed" >
+                        <Feed news={this.state.guild.news}/>
+                    </Page>
+                </div>
             </div>
         );
     }
 
     componentDidMount() {
+        getGuildInfoAll(guild => {
+            this.setState({guild});
+        });
+
         // getGuildMembers(guild => {
         //     console.log(guild);
         //

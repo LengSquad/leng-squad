@@ -6,3 +6,7 @@
 .paper-gear-container {
     padding: 10px;
 }
+
+.main-content {
+    display: flex;
+}

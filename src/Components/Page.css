@@ -1,0 +1,15 @@
+.page {
+    margin: 10px;
+}
+
+.page-title {
+    font-family: sans-serif;
+    text-align: center;
+    font-size: 24px;
+    border-bottom: solid #9b9b9b;
+    margin-bottom: 10px;
+}
+
+.page-content {
+    padding: 10px;
+}

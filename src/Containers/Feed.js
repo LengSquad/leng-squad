@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import './Feed.css';
 
 
-import { getGuildFeed, getItemInfo } from '../API'
+import { getItemInfo } from '../API'
 import Item from "../Components/Item";
 
 class Feed extends Component {
@@ -13,6 +13,23 @@ class Feed extends Component {
             news: [],
             items: []
         };
+    }
+
+    componentWillReceiveProps(props) {
+        if (props.news) {
+            for (let i = 0; i < 10; i ++) {
+                const news = props.news[i];
+                if (news.type === "itemLoot") {
+                    getItemInfo(news.itemId, news.context, news.bonusLists, itemData => {
+                        news.item = itemData;
+                        this.setState({news: props.news});
+                    });
+                }
+                else {
+                    console.log(news.type)
+                }
+            }
+        }
     }
 
     render() {
@@ -26,10 +43,16 @@ class Feed extends Component {
                 item =  <Item item={news.item} url={news.item.icon}/>
             }
 
+            if (i > 9) {
+                return null;
+            }
+
             return (
                 <div key={i}>
                     <div>
-                        {news.character}
+                        <div className="feed-name">
+                            {news.character}
+                        </div>
                         {item}
                     </div>
                 </div>
@@ -42,28 +65,6 @@ class Feed extends Component {
             </div>
         );
     }
-
-    componentDidMount() {
-        getGuildFeed(data => {
-
-            for (let i in data.news) {
-
-                const news = data.news[i];
-                if (news.type === "itemLoot") {
-                    getItemInfo(news.itemId, news.context, news.bonusLists, itemData => {
-                        news.item = itemData;
-                        this.setState({news: data.news});
-                    });
-                }
-                if (i == 9) {
-                    console.log(news)
-                    break;
-                }
-            }
-
-        });
-    }
-
 }
 
 export default Feed;

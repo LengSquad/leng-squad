@@ -1,7 +1,7 @@
 .item {
     display: flex;
     background-color: rgb(14,14,14);
-    width: 400px;
+    width: 100%;
 }
 
 .item-image-container {
@@ -13,10 +13,13 @@
 
 .item-info {
     margin: 12px;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: space-around;
 }
 
 .item-info-box {
-    height: 20.5px;
+    width: 100%;
 }
 
 .item-info-level {
