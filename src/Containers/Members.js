@@ -3,6 +3,7 @@ import './Members.css';
 
 import {List, ListItem} from 'material-ui/List';
 import Avatar from 'material-ui/Avatar';
+import Divider from 'material-ui/Divider';
 import {getClassColor} from "../ColorPicker";
 
 const rankMapping = {
@@ -58,13 +59,16 @@ class Members extends Component {
 
                 const imageUrl = "https://render-eu.worldofwarcraft.com/character/" + member.character.thumbnail;
                 const classColor = getClassColor(member.character.class);
+                let secondaryText = null;
+                if (member.character.spec) {
+                    secondaryText = member.character.spec.name;
+                }
 
                 return <ListItem
-                    style={{color: classColor}}
                     leftAvatar={<Avatar src={imageUrl} />}
-
                     key={member.character.name}
                     primaryText={member.character.name}
+                    secondaryText={<span style={{color: classColor}}>{secondaryText}</span>}
                 />
             });
 
