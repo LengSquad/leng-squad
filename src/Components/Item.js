@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {getItemColor} from "../../ColorPicker";
+import {getItemColor} from "../ColorPicker";
 import './Item.css';
 
 import Paper from 'material-ui/Paper';

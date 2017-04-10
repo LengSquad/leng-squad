@@ -3,6 +3,7 @@ import './Members.css';
 
 import {List, ListItem} from 'material-ui/List';
 import Avatar from 'material-ui/Avatar';
+import {getClassColor} from "../ColorPicker";
 
 const rankMapping = {
     0: "Guild Master",
@@ -51,12 +52,17 @@ class Members extends Component {
 
         let members = ranks.map((rankList, i) => {
 
+            rankList = rankList.sort(this.name);
+
             let list = rankList.map(member => {
 
-                const imageUrl = "http://render-api-eu.worldofwarcraft.com/static-render/eu/" + member.character.thumbnail;
+                const imageUrl = "https://render-eu.worldofwarcraft.com/character/" + member.character.thumbnail;
+                const classColor = getClassColor(member.character.class);
 
                 return <ListItem
-                    leftAvatar={<Avatar src={imageUrl}/>}
+                    style={{color: classColor}}
+                    leftAvatar={<Avatar src={imageUrl} />}
+
                     key={member.character.name}
                     primaryText={member.character.name}
                 />
@@ -66,19 +72,25 @@ class Members extends Component {
                 key={i}
                 primaryTogglesNestedList={true}
                 primaryText={rankMapping[i]}
+                secondaryText={"[" + rankList.length + "]"}
                 nestedItems={list}
+                nestedListStyle={{maxHeight: 400, overflow: "auto"}}
             />
         });
 
         return (
-            <List>
+            <List style={{padding: 0}}>
                 {members}
             </List>
         );
     }
 
     rank(member1, member2) {
-        return member1.rank - member2.rank
+        return member1.rank - member2.rank;
+    }
+
+    name(member1, member2) {
+        return member1.character.name.localeCompare(member2.character.name);
     }
 }
 
