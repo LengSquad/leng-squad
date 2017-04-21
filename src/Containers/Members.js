@@ -13,8 +13,8 @@ const rankMapping = {
     3: "Leng",
     4: "Raider",
     5: "Trialist",
-    6: "Social",
-    7: "Alt"
+    6: "Alt",
+    7: "Social",
 };
 
 class Members extends Component {
