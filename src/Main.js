@@ -17,6 +17,8 @@ class Main extends Component {
         this.state = {
             guild: []
         }
+
+        this.update = this.update.bind(this);
     }
 
     render() {
@@ -40,10 +42,8 @@ class Main extends Component {
     }
 
     componentDidMount() {
-        getGuildInfoAll(guild => {
-            this.setState({guild});
-        });
-
+        this.update();
+        setInterval(this.update, 10000);
         // getGuildMembers(guild => {
         //     console.log(guild);
         //
@@ -60,6 +60,15 @@ class Main extends Component {
         //         raiders: raiders
         //     });
         // });
+    }
+
+    update() {
+        console.log("Fetching new data");
+        getGuildInfoAll(guild => {
+            console.log(guild.lastModified);
+            
+            this.setState({guild});
+        });
     }
 
     rank(char1, char2) {

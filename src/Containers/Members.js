@@ -35,8 +35,6 @@ class Members extends Component {
 
     render() {
 
-        console.log(this.state.members[0]);
-
         let lastRank = -1;
         const ranks = [];
 

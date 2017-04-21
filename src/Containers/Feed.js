@@ -26,7 +26,9 @@ class Feed extends Component {
                     });
                 }
                 else {
-                    console.log(news.type)
+                    news.item = news.item;
+                    console.log("Unsupported type: " + news.type);
+                    console.log(news);
                 }
             }
         }
