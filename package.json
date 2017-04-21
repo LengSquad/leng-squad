@@ -23,7 +23,7 @@
   },
   "scripts": {
     "start": "webpack-dev-server --progress --inline --hot",
-    "build": "webpack --progress --colors",
+    "build": "webpack -p --progress --colors",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   }
